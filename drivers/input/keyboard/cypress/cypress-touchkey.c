@@ -791,7 +791,7 @@ static irqreturn_t touchkey_interrupt(int irq, void *dev_id)
 			touchkey_pressed = 1;			
 		} else if (touch_led_on_screen_touch == TOUCHKEY_LED_DISABLED && handle_led == 1 && touchkey_led_status == TK_CMD_LED_OFF) { 
 			pr_debug("[Touchkey] %s: enabling touchled\n", __func__);
-			i2c_touchkey_write(tkey_i2c->client, (u8 *) &ledCmd[0], 1);
+			i2c_touchkey_write(tkey_i2c->client, (u8 *) &ledCmd[1], 1);
 			touchkey_led_status = TK_CMD_LED_ON;
 		}
 	}
@@ -1208,7 +1208,7 @@ static ssize_t touchkey_led_control(struct device *dev,
 	}
 	if (data == 1 && touchkey_pressed == 1 && touchkey_led_status == TK_CMD_LED_OFF) {
 		pr_debug("[Touchkey] %s: enabling touchled\n", __func__);
-		i2c_touchkey_write(tkey_i2c->client, (u8 *) &ledCmd[0], 1);
+		i2c_touchkey_write(tkey_i2c->client, (u8 *) &ledCmd[1], 1);
 		touchkey_led_status = TK_CMD_LED_ON;
 	}	
 	if (data == 0) {
